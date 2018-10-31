@@ -1,9 +1,10 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, Route, Switch} from "react-router-dom";
 import './container.css';
 import {menus, logo, routeComponent} from '../app/constants/Application';
+import CornettoTypes from './../component/CornettoTypes';
 
- const NavHeader = () => {
+ const NavHeader = (props) => {
 
     const RenderLi = Object.keys(menus).map((key, index) => {
         return (<li key={index} className="nav-item active">
@@ -11,6 +12,10 @@ import {menus, logo, routeComponent} from '../app/constants/Application';
                 <img src={menus[key]} />
             </Link>
         </li>);
+    });
+
+    const RenderRouters = Object.keys(routeComponent).map((path, index) => {
+        return (<Route key={index}  path={path} component={routeComponent[path]}/>);
     });
 
     return (
@@ -23,6 +28,9 @@ import {menus, logo, routeComponent} from '../app/constants/Application';
                     </ul>
                 </div>
             </nav>
+
+                {RenderRouters}
+                <Route exact path="/types" component={CornettoTypes} />
         </div>
     );
 
